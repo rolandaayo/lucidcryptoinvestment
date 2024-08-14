@@ -1,0 +1,15 @@
+{
+  "hash": "8b298123",
+  "configHash": "d8005f6e",
+  "lockfileHash": "c875a088",
+  "browserHash": "13d69485",
+  "optimized": {
+    "appwrite": {
+      "src": "../../node_modules/appwrite/dist/esm/sdk.js",
+      "file": "appwrite.js",
+      "fileHash": "f2af5f66",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
