@@ -6,7 +6,7 @@
 		<title>Register - Lucid Crypto Investment</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="images/favicon.png">
+		<link rel="shortcut icon" href="../images/logo.JPG">
 		<!-- Template CSS Files -->
 		<link rel="stylesheet" href="../css/font-awesome.min.css">
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -124,7 +124,7 @@
 							<form>
 								<!-- Input Field Starts -->
 								<div class="form-group">
-									<input class="form-control name_input" name="name" id="name" placeholder="NAME"
+									<input class="form-control name_input" name="name" id="name" placeholder="FULL NAME"
 										type="text" required>
 								</div>
 								<!-- Input Field Ends -->
@@ -135,9 +135,13 @@
 								</div>
 								<!-- Input Field Ends -->
 								<!-- Input Field Starts -->
-								<div class="form-group">
-									<input class="form-control password_input" name="password" id="password"
-										placeholder="PASSWORD" type="password" required minlength="8">
+								<div class="form-group password_container">
+									<input class="form-control login_password password_input" name="password"
+										id="password" placeholder="PASSWORD" type="password" required>
+									<span id="toggle-password" class="toggle-password">
+										<i id="toggle-icon" class="fa fa-eye"></i>
+										<!-- Using Font Awesome for the icon -->
+									</span>
 								</div>
 								<!-- Input Field Ends -->
 								<!-- Submit Form Button Starts -->
@@ -157,12 +161,13 @@
 				</div>
 			</div>
 			<!-- Template JS Files -->
+			<script type="module" src="../js/auth.js"></script>
+			<script type="module" src="../js/register.js"></script>
 			<script src="../js/jquery-2.2.4.min.js"></script>
 			<script src="../js/bootstrap.min.js"></script>
 			<script src="../js/select2.min.js"></script>
 			<script src="../js/jquery.magnific-popup.min.js"></script>
 			<script src="../js/custom.js"></script>
-			<script type="module" src="../js/auth.js"></script>
 		</div>
 		<!-- Wrapper Ends -->
 	</body>

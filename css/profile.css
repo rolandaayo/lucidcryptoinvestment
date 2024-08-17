@@ -22,11 +22,17 @@ body {
     padding-top: 5rem;
 }
 
+.user_fullname {
+    text-transform: capitalize;
+}
+
 @media (max-width: 990px) {
     .profile-page {
         padding-top: 0;
     }
 }
+
+
 
 .profile-page .content {
     display: flex;
@@ -56,14 +62,13 @@ body {
     .profile-page .content {
         max-width: 420px;
         padding: 0;
-        border-radius: 0;
+        border-radius: 1.5rem;
     }
 }
 
 .profile-page .content__cover {
     position: relative;
-    /* background: linear-gradient(150deg, #1d8cf8 20%, #3358f4 100%); */
-    background: url("../images/backgrounds/404.jpg");
+    background-image: linear-gradient(rgba(253, 150, 26, .2), rgba(253, 150, 26, .2)), url("../images/backgrounds/404.jpg");
 }
 
 .theme-orange .profile-page .content__cover {
@@ -83,10 +88,10 @@ body {
 }
 
 .profile-page .content__bull {
-    display: none;
+    /* display: none;
     height: 12rem;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
 @media (max-width: 990px) {
@@ -404,7 +409,7 @@ body {
 @media (max-width: 990px) {
     .profile-page .content__list {
         margin-top: 1.5rem;
-        order: 2;
+        /* order: 2; */
     }
 }
 
@@ -494,6 +499,8 @@ body {
     left: 0;
     z-index: 1;
 }
+
+
 
 .profile-page .bg div {
     content: "";

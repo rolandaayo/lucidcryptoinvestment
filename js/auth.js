@@ -1,10 +1,7 @@
 "use strict";
-import { account, CheckAuth, client, database, ID } from "./appwrite/config";
+import { account, ID } from "./appwrite/config";
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.pathname === "/pages/profile") {
-    CheckAuth();
-  }
   const createAccountButton = document.querySelector(".createAccount_btn");
   const nameInput = document.querySelector(".name_input");
   const emailInput = document.querySelector(".email_input");
@@ -30,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         createAccountButton.disabled = true;
       }
       const newUserData = {
-        name: nameValue,
+        fullName: nameValue,
         email: emailValue,
         password: passwordValue,
       };
@@ -63,14 +60,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function createUser(newUserData) {
     try {
-      const { email, password } = newUserData;
+      const { email, password, fullName } = newUserData;
 
+      // 1. create new user account in Appwrite
       const newAccount = await account.create(ID.unique(), email, password);
-      console.log(newAccount);
-      alert("Account created successfully!"); // replace with correct notification library
+      // 2. Log in the user immediately after account creation
+      const session = await account.createEmailPasswordSession(email, password);
+      // 3. update the full name
+      if (session) {
+        // This checks if the session was created successfully and then updates the user name
+        const nameUpdateResponse = await account.updateName(fullName);
+        console.log(`name update response :`);
+        // 4. Log out the user
+        await account.deleteSession("current");
+      } else {
+        console.log("Session creation failed, cannot update full name.");
+      }
 
       if (newAccount) {
+        alert("Account created successfully!"); // remember to replace with correct notification library
+
+        // 5. Clear the input fields if the account was created successfully
         clearInputs();
+
+        // and redirect to the login page
+        window.location.href = "/pages/login.html";
       }
     } catch (error) {
       console.error("Failed to create account:", error);
@@ -79,54 +93,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   /*CREATE NEW USER END */
 
-  /*LOGIN START*/
-  if (loginButton) {
-    loginButton.addEventListener("click", async function (e) {
-      e.preventDefault();
-      const emailValue = loginEmailInput.value.trim();
-      const passwordValue = loginPasswordInput.value.trim();
-
-      const loginInfo = {
-        email: emailValue,
-        password: passwordValue,
-      };
-      await loginUser(loginInfo);
-    });
-  }
-  async function loginUser(userData) {
-    try {
-      const { email, password } = userData;
-
-      const response = await account.createEmailPasswordSession(
-        email,
-        password
-      );
-      console.log(response);
-      if (response) {
-        window.location.href = "/pages/profile";
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
 
   /*LOGIN END*/
 
   /*LOGOUT START*/
-  async function logoutUser() {
-    try {
-      const logoutResponse = await account.deleteSession("current");
-      console.log("Session ended successfully:", logoutResponse);
-      window.location.href = "/pages/login";
-    } catch (error) {
-      console.error("Failed to log out:", error);
-    }
-  }
-  document
-    .querySelector(".logout_button")
-    .addEventListener("click", async function () {
-      await logoutUser();
-    });
+  // async function logoutUser() {
+  //   try {
+  //     const logoutResponse = await account.deleteSession("current");
+  //     console.log("Session ended successfully:", logoutResponse);
+  //     window.location.href = "/pages/login";
+  //   } catch (error) {
+  //     console.error("Failed to log out:", error);
+  //   }
+  // }
+  // document
+  //   .querySelector(".logout_button")
+  //   .addEventListener("click", async function () {
+  //     await logoutUser();
+  //   });
 
-  /*LOGOUT END*/
+  // /*LOGOUT END*/
 });
