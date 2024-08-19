@@ -1,10 +1,7 @@
 "use strict";
-import { account, CheckAuth, client, database, ID } from "./appwrite/config";
+import { account, ID } from "./appwrite/config";
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.pathname === "/pages/profile") {
-    CheckAuth();
-  }
   const createAccountButton = document.querySelector(".createAccount_btn");
   const nameInput = document.querySelector(".name_input");
   const emailInput = document.querySelector(".email_input");
@@ -56,21 +53,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return true;
   }
-
   /*VALIDATE USER INPUTS END*/
 
   /*CREATE NEW USER START */
-
   async function createUser(newUserData) {
     try {
-      const { email, password } = newUserData;
+      const { email, password, name } = newUserData;
 
-      const newAccount = await account.create(ID.unique(), email, password);
-      console.log(newAccount);
-      alert("Account created successfully!"); // replace with correct notification library
+      // 1. create new user account in Appwrite
+      const newAccount = await account.create(
+        ID.unique(),
+        email,
+        password,
+        name
+      );
 
       if (newAccount) {
+        console.log(newAccount);
+        alert("Account created successfully!"); // remember to replace with correct notification library
+
+        // 2. Clear the input fields if the account was created successfully
         clearInputs();
+        // and redirect to the login page
+        window.location.href = "/pages/login.html";
       }
     } catch (error) {
       console.error("Failed to create account:", error);
@@ -78,55 +83,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   /*CREATE NEW USER END */
-
-  /*LOGIN START*/
-  if (loginButton) {
-    loginButton.addEventListener("click", async function (e) {
-      e.preventDefault();
-      const emailValue = loginEmailInput.value.trim();
-      const passwordValue = loginPasswordInput.value.trim();
-
-      const loginInfo = {
-        email: emailValue,
-        password: passwordValue,
-      };
-      await loginUser(loginInfo);
-    });
-  }
-  async function loginUser(userData) {
-    try {
-      const { email, password } = userData;
-
-      const response = await account.createEmailPasswordSession(
-        email,
-        password
-      );
-      console.log(response);
-      if (response) {
-        window.location.href = "/pages/profile";
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  /*LOGIN END*/
-
-  /*LOGOUT START*/
-  async function logoutUser() {
-    try {
-      const logoutResponse = await account.deleteSession("current");
-      console.log("Session ended successfully:", logoutResponse);
-      window.location.href = "/pages/login";
-    } catch (error) {
-      console.error("Failed to log out:", error);
-    }
-  }
-  document
-    .querySelector(".logout_button")
-    .addEventListener("click", async function () {
-      await logoutUser();
-    });
-
-  /*LOGOUT END*/
 });
