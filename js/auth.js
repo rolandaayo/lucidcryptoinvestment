@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         createAccountButton.disabled = true;
       }
       const newUserData = {
-        fullName: nameValue,
+        name: nameValue,
         email: emailValue,
         password: passwordValue,
       };
@@ -53,36 +53,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return true;
   }
-
   /*VALIDATE USER INPUTS END*/
 
   /*CREATE NEW USER START */
-
   async function createUser(newUserData) {
     try {
-      const { email, password, fullName } = newUserData;
+      const { email, password, name } = newUserData;
 
       // 1. create new user account in Appwrite
-      const newAccount = await account.create(ID.unique(), email, password);
-      // 2. Log in the user immediately after account creation
-      const session = await account.createEmailPasswordSession(email, password);
-      // 3. update the full name
-      if (session) {
-        // This checks if the session was created successfully and then updates the user name
-        const nameUpdateResponse = await account.updateName(fullName);
-        console.log(`name update response :`);
-        // 4. Log out the user
-        await account.deleteSession("current");
-      } else {
-        console.log("Session creation failed, cannot update full name.");
-      }
+      const newAccount = await account.create(
+        ID.unique(),
+        email,
+        password,
+        name
+      );
 
       if (newAccount) {
+        console.log(newAccount);
         alert("Account created successfully!"); // remember to replace with correct notification library
 
-        // 5. Clear the input fields if the account was created successfully
+        // 2. Clear the input fields if the account was created successfully
         clearInputs();
-
         // and redirect to the login page
         window.location.href = "/pages/login.html";
       }
@@ -92,26 +83,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   /*CREATE NEW USER END */
-
-  
-
-  /*LOGIN END*/
-
-  /*LOGOUT START*/
-  // async function logoutUser() {
-  //   try {
-  //     const logoutResponse = await account.deleteSession("current");
-  //     console.log("Session ended successfully:", logoutResponse);
-  //     window.location.href = "/pages/login";
-  //   } catch (error) {
-  //     console.error("Failed to log out:", error);
-  //   }
-  // }
-  // document
-  //   .querySelector(".logout_button")
-  //   .addEventListener("click", async function () {
-  //     await logoutUser();
-  //   });
-
-  // /*LOGOUT END*/
 });

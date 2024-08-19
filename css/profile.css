@@ -48,15 +48,10 @@ body {
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
 }
 
-.icon-log-out {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    stroke-width: 1;
-    stroke: currentColor;
-    fill: currentColor;
-    /* background-color: red; */
-}
+
+
+
+
 
 @media (max-width: 990px) {
     .profile-page .content {
@@ -220,7 +215,7 @@ body {
     }
 }
 
-.profile-page .content__actions a {
+.profile-page .content__actions button {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -230,36 +225,39 @@ body {
     border-radius: 2rem;
     text-decoration: none;
     font-size: 0.9rem;
+    outline: 1px solid #fd961ae6;
+    border: none;
+
 }
 
 @media (max-width: 990px) {
-    .profile-page .content__actions a {
+    .profile-page .content__actions button {
         padding: 0.5rem;
     }
 }
 
 @media (max-width: 990px) {
-    .profile-page .content__actions a span {
+    .profile-page .content__actions button span {
         display: none;
     }
 }
 
-.profile-page .content__actions a svg {
+.profile-page .content__actions button svg {
     width: 2rem;
     margin-right: 0.4rem;
 }
 
 @media (max-width: 990px) {
-    .profile-page .content__actions a svg {
+    .profile-page .content__actions button svg {
         margin: 0;
     }
 }
 
-.profile-page .content__actions a svg path:last-child {
+.profile-page .content__actions button svg path:last-child {
     opacity: 0.5;
 }
 
-.profile-page .content__actions a:first-child {
+.profile-page .content__actions button:first-child {
     color: rgba(253, 150, 26, .9);
 }
 
@@ -279,7 +277,7 @@ body {
     color: #0098f0;
 }
 
-.profile-page .content__actions a:last-child {
+.profile-page .content__actions button:last-child {
     color: rgba(253, 150, 26, .9);
 }
 
@@ -299,7 +297,7 @@ body {
     color: #00f2c3;
 }
 
-.profile-page .content__actions a:hover:first-child {
+.profile-page .content__actions button:hover:first-child {
     background: rgba(253, 150, 26, .7);
     color: #fff;
 }
@@ -320,7 +318,7 @@ body {
     background: #0098f0;
 }
 
-.profile-page .content__actions a:hover:last-child {
+.profile-page .content__actions button:hover:last-child {
     background: rgba(253, 150, 26, .7);
     color: #fff;
 }

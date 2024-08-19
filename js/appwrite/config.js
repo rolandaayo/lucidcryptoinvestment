@@ -13,7 +13,7 @@ const account = new Account(client);
 async function CheckAuth() {
   try {
     const currentSession = await account.get();
-    console.log(`user is logged in:`, currentSession);
+    console.log(`user is logged in:`);
     return currentSession;
   } catch (error) {
     window.location.href = "/pages/login";

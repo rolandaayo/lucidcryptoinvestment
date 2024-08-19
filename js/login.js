@@ -8,6 +8,20 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("toggle-password")
     .addEventListener("click", toggleVisibility);
 
+  /*VALIDATE USER INPUTS START*/
+  function validateInputs(emailField, passwordField) {
+    if (!emailField.value.trim()) {
+      alert("Email is required");
+      return false;
+    }
+    if (!passwordField.value.trim()) {
+      alert("Password is required");
+      return false;
+    }
+    return true;
+  }
+
+  /*VALIDATE USER INPUTS END*/
   /*LOGIN START*/
   async function loginUser(userData) {
     try {
@@ -17,12 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
         email,
         password
       );
+      console.log(response);
       if (response) {
-        window.location.href = "/pages/profile";
         console.log(`user session created:`);
+        window.location.href = "/pages/profile";
       }
     } catch (error) {
-      console.log(error);
+      alert(error.message);
+      console.log(error.message);
     }
   }
   if (loginButton) {
@@ -30,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       const emailValue = loginEmailInput.value.trim();
       const passwordValue = loginPasswordInput.value.trim();
+      if (validateInputs(loginEmailInput, loginPasswordInput)) {
+        loginButton.disabled = true;
+      }
 
       const loginInfo = {
         email: emailValue,
