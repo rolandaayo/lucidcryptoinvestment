@@ -152,6 +152,27 @@ a:focus {
   outline: 0;
 }
 
+.password_container {
+  /* outline: 2px solid white; */
+  position: relative;
+  width: 100%;
+  /* max-width: 300px; */
+}
+
+#password {
+  width: 100%;
+  padding-right: 40px;
+  /* Space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 .form-control {
   box-shadow: none;
   border: 1px solid #333;
