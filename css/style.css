@@ -618,7 +618,7 @@ body.light .shop-checkout .table tbody > tr {
 
 /*** Preloader ***/
 
-#preloader {
+/* #preloader {
   position: fixed;
   z-index: 1111111111111;
   top: 0;
@@ -650,7 +650,7 @@ body.light .shop-checkout .table tbody > tr {
   -webkit-animation: dash 3s linear infinite;
   animation: dash 3s linear infinite;
   fill-opacity: 0;
-}
+} */
 
 /* Back To Top */
 
