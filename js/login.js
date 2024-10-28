@@ -1,4 +1,5 @@
 import { account, toggleVisibility } from "./appwrite/config";
+
 document.addEventListener("DOMContentLoaded", function () {
   console.log(`LOGIN READY`);
   const loginEmailInput = document.querySelector(".login_email");
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(error.message);
     }
   }
+  
   if (loginButton) {
     loginButton.addEventListener("click", async function (e) {
       e.preventDefault();
